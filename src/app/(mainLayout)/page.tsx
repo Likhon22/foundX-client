@@ -1,7 +1,14 @@
-export default function Home() {
+import Landing from "@/src/components/modules/home/Home/Landing";
+import RecentPosts from "@/src/components/modules/home/Home/RecentPosts";
+import { Input } from "@heroui/input";
+
+const Home = () => {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <p>Home</p>
-    </section>
+    <>
+      <Landing />
+      <RecentPosts />
+    </>
   );
-}
+};
+
+export default Home;

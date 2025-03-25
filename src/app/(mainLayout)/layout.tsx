@@ -1,4 +1,4 @@
-import { Navbar } from "@/src/components/navbar";
+import { Navbar } from "@/src/components/UI/navbar";
 import React from "react";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
@@ -6,9 +6,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="relative flex flex-col h-screen">
         <Navbar />
-        <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-          {children}
-        </main>
+        <main className="">{children}</main>
       </div>
     </div>
   );
