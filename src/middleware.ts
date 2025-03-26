@@ -1,12 +1,45 @@
+import { TUser } from "./types/posts";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const routes = ["/login", "/register"];
+type TRoleBasedRoutes = {
+  USER: RegExp[];
+  ADMIN: RegExp[];
+};
+
+const roleBasedRoutes: TRoleBasedRoutes = {
+  USER: [/^\/profile/],
+  ADMIN: [/^\/admin/],
+};
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // const user: Partial<TUser> = {
+  //   role: "USER",
+  //   name: "John Doe",
+  //   email: "johndoe@example.com",
+  // };
+  const user = undefined;
+  if (!user) {
+    if (routes.includes(pathname)) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  const userRole = user?.role as keyof TRoleBasedRoutes;
+  if (userRole && roleBasedRoutes[userRole]) {
+    const allowedRoutes = roleBasedRoutes[userRole];
+    const isMatched = allowedRoutes.some((path) => pathname.match(path));
+    if (isMatched) {
+      return NextResponse.next();
+    }
+  }
   return NextResponse.redirect(new URL("/", request.url));
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/profile",
+  matcher: ["/profile/:path*", "/admin/:path*", "/login", "/register"],
 };

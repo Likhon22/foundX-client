@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const RecentPosts = async () => {
   const posts = await getRecentPosts();
-  console.log(posts);
 
   return (
     <Container>

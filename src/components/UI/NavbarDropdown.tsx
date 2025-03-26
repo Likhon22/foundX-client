@@ -52,6 +52,7 @@ const NavbarDropdown = () => {
           {" "}
           About
         </DropdownItem>
+        <DropdownItem key="logout"> Logout</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );
