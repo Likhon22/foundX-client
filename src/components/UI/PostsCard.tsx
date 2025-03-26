@@ -9,7 +9,8 @@ const PostsCard = ({ post }: { post: TPosts }) => {
       <Image
         removeWrapper
         alt={post.title}
-        className="object-cover transition duration-700 ease-in-out hover:scale-105"
+        className="object-cover
+        transition duration-700 ease-in-out hover:scale-105"
         height={200}
         src={post.images[0]}
       />
