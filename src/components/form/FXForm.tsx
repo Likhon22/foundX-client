@@ -14,6 +14,7 @@ const FXForm = ({ children, onSubmit, defaultValues, resolver }: IProps) => {
   const methods = useForm({
     defaultValues,
     resolver,
+    mode: "onBlur",
   });
   const submitHandler = methods.handleSubmit;
   const formConfig: formConfig = {};

@@ -1,10 +1,13 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
 import { Button } from "@heroui/button";
+import loginValidations from "@/src/schemas/login.schema";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const Login = () => {
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
   };
   return (
@@ -17,7 +20,10 @@ const Login = () => {
           </p>
         </div>
         <div>
-          <FXForm onSubmit={onSubmit}>
+          <FXForm
+            onSubmit={onSubmit}
+            resolver={zodResolver(loginValidations.loginValidationSchema)}
+          >
             <div className="py-3">
               <FXInput
                 placeholder="Email"
@@ -31,7 +37,7 @@ const Login = () => {
             <div className="py-3">
               <FXInput
                 placeholder="Password"
-                type="password"
+                type="text"
                 id="password"
                 name="password"
                 required

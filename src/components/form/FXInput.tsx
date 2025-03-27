@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@heroui/input";
+
 import { useFormContext } from "react-hook-form";
 
 type Props = {
@@ -9,13 +10,20 @@ type Props = {
   name: string;
   required: boolean;
 };
+
 const FXInput = ({ placeholder, type, id, name, required = true }: Props) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <Input
       {...register(name)}
       variant="bordered"
       size="md"
+      isInvalid={!!errors[name]}
+      errorMessage={errors[name] ? (errors[name].message as string) : ""}
       placeholder={placeholder}
       type={type}
       id={id}
