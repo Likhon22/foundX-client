@@ -8,7 +8,7 @@ type Props = {
   type: string;
   id: string;
   name: string;
-  required: boolean;
+  required?: boolean;
 };
 
 const FXInput = ({ placeholder, type, id, name, required = true }: Props) => {

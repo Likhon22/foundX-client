@@ -5,6 +5,7 @@ import FXInput from "@/src/components/form/FXInput";
 import { Button } from "@heroui/button";
 import loginValidations from "@/src/schemas/login.schema";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
 
 const Login = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -52,6 +53,9 @@ const Login = () => {
               </Button>
             </div>
           </FXForm>
+          <div className="text-center">
+            Don&lsquo;t have account ? <Link href={"/register"}>Register</Link>
+          </div>
         </div>
       </div>
     </div>
