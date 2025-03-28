@@ -6,22 +6,29 @@ import { Button } from "@heroui/button";
 import loginValidations from "@/src/schemas/login.schema";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import { loginUser } from "@/src/services/AuthServices";
 
 const Login = () => {
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const res = await loginUser(data);
+    console.log(res);
   };
   return (
     <div className="flex flex-col h-screen justify-center items-center">
-      <div className="bg-gray-100 p-12 rounded-md w-[35%] mx-auto shadow-md ">
+      <div className=" p-12 rounded-md w-[35%] mx-auto shadow-md ">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="text-3xl my-2 font-bold text-black">Login</h1>
+          <h1 className="text-3xl my-2 font-bold text-white">Login</h1>
           <p className="mb-4 text-gray-600">
             Welcome Back! Please enter your details
           </p>
         </div>
         <div>
           <FXForm
+            defaultValues={{
+              email: "mir@gmail.com",
+
+              password: "123456",
+            }}
             onSubmit={onSubmit}
             resolver={zodResolver(loginValidations.loginValidationSchema)}
           >
