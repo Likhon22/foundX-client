@@ -1,4 +1,5 @@
 "use client";
+import { logout } from "@/src/services/AuthServices";
 import { Avatar } from "@heroui/avatar";
 import {
   Dropdown,
@@ -52,7 +53,10 @@ const NavbarDropdown = () => {
           {" "}
           About
         </DropdownItem>
-        <DropdownItem key="logout"> Logout</DropdownItem>
+        <DropdownItem onPress={() => logout()} key="logout">
+          {" "}
+          Logout
+        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );
