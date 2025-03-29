@@ -17,10 +17,7 @@ export const siteConfig = {
       label: "Found Item",
       href: "/found-item",
     },
-    {
-      label: "register",
-      href: "/register",
-    },
+    ,
   ],
   navMenuItems: [
     {

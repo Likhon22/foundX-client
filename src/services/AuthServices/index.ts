@@ -44,7 +44,7 @@ export const getCurrentUser = async () => {
       decoded = (await jwtDecode(accessToken)) as TLoggedInUser;
 
       return {
-        _id: decoded,
+        _id: decoded._id,
         name: decoded.name,
         email: decoded.email,
         mobileNumber: decoded.mobileNumber,

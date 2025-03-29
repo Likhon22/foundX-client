@@ -1,4 +1,5 @@
 "use client";
+import { useUser } from "@/src/context/user.provider";
 import { logout } from "@/src/services/AuthServices";
 import { Avatar } from "@heroui/avatar";
 import {
@@ -11,13 +12,18 @@ import { useRouter } from "next/navigation";
 
 const NavbarDropdown = () => {
   const router = useRouter();
+  const { user, setIsLoading } = useUser();
   const handleNavigation = (path: string) => {
     router.push(path);
+  };
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
   };
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar className="cursor-pointer" name="John Doe" />
+        <Avatar className="cursor-pointer" name={user?.name} />
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem
@@ -53,7 +59,7 @@ const NavbarDropdown = () => {
           {" "}
           About
         </DropdownItem>
-        <DropdownItem onPress={() => logout()} key="logout">
+        <DropdownItem onPress={() => handleLogout()} key="logout">
           {" "}
           Logout
         </DropdownItem>
