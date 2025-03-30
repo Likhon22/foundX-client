@@ -3,9 +3,16 @@
 import { AddIcon, TrashIcon } from "@/src/assets/icons";
 import FXDatePicker from "@/src/components/form/FXDatePicker";
 import FXInput from "@/src/components/form/FXInput";
+import dateToIso from "@/src/utils/dateToIso";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/react";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 
 const CreatePost = () => {
   const methods = useForm();
@@ -17,13 +24,16 @@ const CreatePost = () => {
   const handleQuestions = () => {
     append({ name: "questions" });
   };
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const date = dateToIso(data.dateFound);
+
     const postData = {
       ...data,
 
       questions: data.questions?.map(
         (question: { value: string }) => question.value
       ),
+      dateFound: dateToIso(data.dateFound),
     };
     console.log(postData);
   };
