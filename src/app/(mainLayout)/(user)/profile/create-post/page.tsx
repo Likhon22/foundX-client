@@ -3,6 +3,7 @@
 import { AddIcon, TrashIcon } from "@/src/assets/icons";
 import FXDatePicker from "@/src/components/form/FXDatePicker";
 import FXInput from "@/src/components/form/FXInput";
+import FXSelect from "@/src/components/form/FXSelect";
 import dateToIso from "@/src/utils/dateToIso";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/react";
@@ -13,6 +14,7 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+import { allDistict } from "@bangladeshi/bangladesh-address";
 
 const CreatePost = () => {
   const methods = useForm();
@@ -25,8 +27,6 @@ const CreatePost = () => {
     append({ name: "questions" });
   };
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    const date = dateToIso(data.dateFound);
-
     const postData = {
       ...data,
 
@@ -37,6 +37,13 @@ const CreatePost = () => {
     };
     console.log(postData);
   };
+  const cityOptions = allDistict()
+    .sort()
+    .map((city: string) => ({
+      label: city,
+      value: city,
+    }));
+
   return (
     <div className="h-full rounded-xl bg-gradient-to-b from-default-100 px-[73px] py-12">
       <h1 className="text-2xl font-semibold">Post a found item</h1>
@@ -66,7 +73,12 @@ const CreatePost = () => {
               />
             </div>
             <div className="min-w-fit flex-1">
-              {/* <FXSelect label="City" name="city" options={cityOptions} /> */}
+              <FXSelect
+                placeholder="City"
+                label="City"
+                name="city"
+                options={cityOptions}
+              />
             </div>
           </div>
           <div className="flex flex-wrap gap-2 py-2">
