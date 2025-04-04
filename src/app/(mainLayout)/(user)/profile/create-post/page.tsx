@@ -27,8 +27,16 @@ const CreatePost = () => {
   const handleQuestions = () => {
     append({ name: "questions" });
   };
-  const { data: categories } = useGetCategories();
-  console.log(categories);
+  const { data: categories, isLoading: categoryLoading } = useGetCategories();
+  let categoryOptions: { key: string; label: string }[] = [];
+  if (categories?.data && !categoryLoading) {
+    categoryOptions = categories?.data
+      ?.sort()
+      ?.map((category: { _id: string; name: string }) => ({
+        key: category._id,
+        label: category.name,
+      }));
+  }
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const postData = {
@@ -44,8 +52,8 @@ const CreatePost = () => {
   const cityOptions = allDistict()
     .sort()
     .map((city: string) => ({
+      key: city,
       label: city,
-      value: city,
     }));
 
   return (
@@ -82,6 +90,14 @@ const CreatePost = () => {
                 label="City"
                 name="city"
                 options={cityOptions}
+              />
+            </div>
+            <div className="min-w-fit flex-1">
+              <FXSelect
+                placeholder="Category"
+                label="Category"
+                name="category"
+                options={categoryOptions}
               />
             </div>
           </div>
