@@ -15,6 +15,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { allDistict } from "@bangladeshi/bangladesh-address";
+import { useGetCategories } from "@/src/hooks/categories.hook";
 
 const CreatePost = () => {
   const methods = useForm();
@@ -26,6 +27,9 @@ const CreatePost = () => {
   const handleQuestions = () => {
     append({ name: "questions" });
   };
+  const { data: categories } = useGetCategories();
+  console.log(categories);
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const postData = {
       ...data,
